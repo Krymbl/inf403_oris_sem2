@@ -5,9 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-//Говорит, что эта метка должна сохраниться до момента выполнения программы, чтобы контекст мог ее увидеть.
+//Метка должна сохраниться до момента выполнения программы, чтобы контекст мог ее увидеть.
 @Retention(value = RetentionPolicy.RUNTIME)
-//Говорит, что эту метку можно вешать только на методы.
+//Метку можно вешать только на методы.
 @Target(value = ElementType.METHOD)
 public @interface GetMapping {
     String value();

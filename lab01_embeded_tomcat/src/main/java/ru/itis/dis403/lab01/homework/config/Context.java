@@ -2,9 +2,10 @@ package ru.itis.dis403.lab01.homework.config;
 
 import ru.itis.dis403.lab01.homework.annotation.Component;
 import ru.itis.dis403.lab01.homework.annotation.Controller;
-import ru.itis.dis403.lab01.homework.config.PathScan;
+import ru.itis.dis403.lab01.homework.annotation.GetMapping;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class Context {
 
     private Map<Class<?>, Object> components = new HashMap<>();
     private Map<Class<?>, Object> controllers = new HashMap<>();
+    private Map<String, HandlerMethod> mappings = new HashMap<>();
 
     public Context() {
         scanComponent();
@@ -92,7 +94,7 @@ public class Context {
                 }
 
                 try {
-                    Object o = constructor.newInstance();
+                    Object o = constructor.newInstance(args);
                     controllers.put(c, o);
                     countClasses--;
                     System.out.println(c + " добавлен Controller");
@@ -103,7 +105,21 @@ public class Context {
             }
         }
 
+        for (Object controller : controllers.values()) {
+            Method[] methods = controller.getClass().getDeclaredMethods();
+            for (Method method : methods) {
+                if (method.isAnnotationPresent(GetMapping.class)) {
+                    GetMapping mapping = method.getAnnotation(GetMapping.class);
+                    String url = mapping.value();
+                    mappings.put(url, new HandlerMethod(controller, method));
+                }
+            }
+        }
 
+    }
+
+    public Map<String, HandlerMethod> getMappings() {
+        return mappings;
     }
 
 }

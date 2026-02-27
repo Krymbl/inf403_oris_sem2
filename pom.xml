@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lab01_embeded_tomcat</module>
+        <module>lab03_jpa</module>
     </modules>
 
     <properties>

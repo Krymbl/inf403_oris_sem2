@@ -13,19 +13,39 @@ public class MainController {
 
     @GetMapping("/index")
     public void index(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html; charset=utf-8");
         Writer writer = resp.getWriter();
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        writer.write("<html><head><title>Index</title><meta charset='UTF-8'></head><body><div><h1>Приветствую на главной странице index</h1></div></body></html>");
+        writer.write(
+                "<html>" +
+                        "<head>" +
+                            "<title>Index</title>" +
+                            "<meta charset='UTF-8'>" +
+                        "</head>" +
+                        "<body>" +
+                            "<div>" +
+                                "<h1>Приветствую на главной странице index</h1>" +
+                            "</div>" +
+                        "</body>" +
+                        "</html>");
 
     }
 
     @GetMapping("/home")
     public void home(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html; charset=utf-8");
         Writer writer = resp.getWriter();
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        writer.write("<html><head><title>Home</title><meta charset='UTF-8'></head><body><div><h1>Приветствую на домашней странице (home)</h1></div></body></html>");
+        writer.write(
+                "<html>" +
+                        "<head>" +
+                            "<title>Home</title>" +
+                            "<meta charset='UTF-8'>" +
+                        "</head>" +
+                        "<body>" +
+                            "<div>" +
+                                "<h1>Приветствую на домашней странице (home)</h1>" +
+                            "</div> " +
+                        "</body>" +
+                    "</html>");
 
     }
 
